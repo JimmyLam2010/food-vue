@@ -8,10 +8,25 @@ import router from './router'
 import {Tabs,TabPane} from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.config.productionTip = false
+//验证码
+import SlideVerify from 'vue-monoplasty-slide-verify';
 
+//http 异步请求
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+
+//设置全局
 Vue.use(Tabs);
 Vue.use(TabPane);
+
+//验证码
+Vue.use(SlideVerify);
+
+//设置请求方式
+Vue.use(VueAxios, axios);
+
+Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({

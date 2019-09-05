@@ -10,6 +10,6 @@ Vue.use(Router)
 export default new Router({
   routes: [
     HomeRouter,
-    UserRouter
+    ...UserRouter
   ]
 })
