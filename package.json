@@ -16,8 +16,10 @@
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^2.6.7",
     "vue-axios": "^2.1.4",
+    "vue-cookies": "^1.5.13",
     "vue-monoplasty-slide-verify": "^1.0.5",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "wc-messagebox": "^1.10.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

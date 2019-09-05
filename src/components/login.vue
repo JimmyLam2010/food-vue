@@ -2,16 +2,13 @@
   <div>
     <div class="topbox">
       <div class="topmain">
-        <router-link to="/login">
-          <img src="/static/img/back.png">
-        </router-link>
-        <h1>免费注册</h1>
+        <h1>登录</h1>
       </div>
     </div>
     <div class="conbox">
       <div class="conmain register">
-        <h2>温馨提示：以下所有为必填项</h2>
-          <form method="post" @submit.prevent="register()">
+        <h2>温馨提示：用户登录</h2>
+          <form method="post" @submit.prevent="login()">
             <div>
               <input type="text" placeholder="请输入用户名" name="username" required v-model="user.username" />
             </div>
@@ -29,10 +26,10 @@
                 @refresh="onRefresh"
                 ></slide-verify>
             </div>
-            <p>
-              <a href="register.html#">《网站服务协议》</a>
+            <p style="text-align:center;">
+              <router-link to="/register">免费注册</router-link>
             </p>
-            <button>同意以上协议并注册</button>
+            <button>登录</button>
           </form>
       </div>
     </div>
@@ -63,7 +60,7 @@
       onRefresh(){
           this.imgcode = false
       },
-      register()
+      login()
       {
         if(!this.imgcode)
         {
@@ -74,12 +71,19 @@
         var data = {username:this.user.username,password:this.user.password};
 
         //发送请求
-        proxy.userRegister(data).then((response)=>{
+        proxy.userLogin(data).then((response)=>{
           if(!response.result)
           {
-            this.$alert(response.msg)
+            this.$alert(response.msg);
           }else{
-            this.$router.push('/login');
+            let user = {
+              userid:response.data.id,
+              username:response.data.username,
+              avatar:response.data.avatar
+            }
+            this.$cookies.set("user",user);
+            
+            this.$router.push('/user');
           }
         });
       }
