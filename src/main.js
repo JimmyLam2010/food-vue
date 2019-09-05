@@ -4,7 +4,14 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+//ElementUI 
+import {Tabs,TabPane} from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 Vue.config.productionTip = false
+
+Vue.use(Tabs);
+Vue.use(TabPane);
 
 /* eslint-disable no-new */
 new Vue({

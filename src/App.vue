@@ -1,12 +1,15 @@
 <template>
   <div id="app">
     <router-view/>
+    <footer-component></footer-component>
   </div>
 </template>
 
 <script>
+import footerComponent from './components/footer.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components:{footerComponent}
 }
 </script>
 
