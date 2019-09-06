@@ -17,16 +17,14 @@
 			<a class="rt_searchIcon" href="map.html"><img style="width:70%;" src="/static/img/mapIcon.png"></a>
 		</header>
 
-		<!--slide-->
+		<!--banner-->
 		<div id="slide" class="public-banner">
 			<swiper :options="swiperOption">
         <!-- slides -->
-        <swiper-slide>
-          <img src="/static/upload/banner1.jpg.png" />
-          </swiper-slide>
-        <swiper-slide>
-          <img src="/static/upload/banner2.jpg" />
+        <swiper-slide v-for="item in bannerFood" v-bind:key="item.id">
+          <img :src="item.thumb" />
         </swiper-slide>
+
       </swiper>
 		</div>
 		
@@ -34,126 +32,14 @@
     <div class="swiper-container foodhot">
       <swiper :options="swiperOption2">
         <!-- slides -->
-        <swiper-slide>
+        <swiper-slide v-for="(item) in hotFood" v-bind:key="item.id">
           <div class="menu-img">
-              <img src="/static/img/index (1).png" />
+              <img :src="item.thumb" />
           </div>
           <div class="menu-txt">
-            <h4>宫保鸡丁</h4>
+            <h4>{{item.name}}</h4>
             <p class="list2">
-              <b>￥25<em>(6折)</em></b>
-              <div class="btn">  
-                <button class="minus">-</button>  
-                <i>0</i>  
-                <button class="add">+</button>  
-              </div> 
-            </p>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="menu-img">
-              <img src="/static/img/index (1).png" />
-          </div>
-          <div class="menu-txt">
-            <h4>宫保鸡丁</h4>
-            <p class="list2">
-              <b>￥25<em>(6折)</em></b>
-              <div class="btn">  
-                <button class="minus">-</button>  
-                <i>0</i>  
-                <button class="add">+</button>  
-              </div> 
-            </p>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="menu-img">
-              <img src="/static/img/index (1).png" />
-          </div>
-          <div class="menu-txt">
-            <h4>宫保鸡丁</h4>
-            <p class="list2">
-              <b>￥25<em>(6折)</em></b>
-              <div class="btn">  
-                <button class="minus">-</button>  
-                <i>0</i>  
-                <button class="add">+</button>  
-              </div> 
-            </p>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="menu-img">
-              <img src="/static/img/index (1).png" />
-          </div>
-          <div class="menu-txt">
-            <h4>宫保鸡丁</h4>
-            <p class="list2">
-              <b>￥25<em>(6折)</em></b>
-              <div class="btn">  
-                <button class="minus">-</button>  
-                <i>0</i>  
-                <button class="add">+</button>  
-              </div> 
-            </p>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="menu-img">
-              <img src="/static/img/index (1).png" />
-          </div>
-          <div class="menu-txt">
-            <h4>宫保鸡丁</h4>
-            <p class="list2">
-              <b>￥25<em>(6折)</em></b>
-              <div class="btn">  
-                <button class="minus">-</button>  
-                <i>0</i>  
-                <button class="add">+</button>  
-              </div> 
-            </p>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="menu-img">
-              <img src="/static/img/index (1).png" />
-          </div>
-          <div class="menu-txt">
-            <h4>宫保鸡丁</h4>
-            <p class="list2">
-              <b>￥25<em>(6折)</em></b>
-              <div class="btn">  
-                <button class="minus">-</button>  
-                <i>0</i>  
-                <button class="add">+</button>  
-              </div> 
-            </p>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="menu-img">
-              <img src="/static/img/index (1).png" />
-          </div>
-          <div class="menu-txt">
-            <h4>宫保鸡丁</h4>
-            <p class="list2">
-              <b>￥25<em>(6折)</em></b>
-              <div class="btn">  
-                <button class="minus">-</button>  
-                <i>0</i>  
-                <button class="add">+</button>  
-              </div> 
-            </p>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="menu-img">
-              <img src="/static/img/index (1).png" />
-          </div>
-          <div class="menu-txt">
-            <h4>宫保鸡丁</h4>
-            <p class="list2">
-              <b>￥25<em>(6折)</em></b>
+              <b>￥{{item.price}}</b>
               <div class="btn">  
                 <button class="minus">-</button>  
                 <i>0</i>  
@@ -170,541 +56,18 @@
     <!--分类商品-->
     <div class="main">
       <el-tabs v-model="activeName" :tab-position="tabPosition" @tab-click="handleClick">
-        <el-tab-pane label="用户管理" name="first">
+        <el-tab-pane v-for="(item,key) in foodCate" :label="item.name" :name="item.name" v-bind:key="item.id">
           <div class="swiper-container foodcate">
             <swiper :options="swiperOption3">
               <!-- slides -->
-              <swiper-slide>
+              <swiper-slide v-for="item in foodList" v-bind:key="item.id">
                 <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
+                    <img :src="item.thumb" />
                 </div>
                 <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
+                  <h4>{{item.name}}</h4>
                   <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <!-- Optional controls -->
-              <div class="swiper-pagination" slot="pagination"></div>
-            </swiper>
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="配置管理" name="second">
-          <div class="swiper-container foodcate">
-            <swiper :options="swiperOption3">
-              <!-- slides -->
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <!-- Optional controls -->
-              <div class="swiper-pagination" slot="pagination"></div>
-            </swiper>
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="角色管理" name="third">
-          <div class="swiper-container foodcate">
-            <swiper :options="swiperOption3">
-              <!-- slides -->
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <!-- Optional controls -->
-              <div class="swiper-pagination" slot="pagination"></div>
-            </swiper>
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="定时任务补偿" name="fourth">
-          <div class="swiper-container foodcate">
-            <swiper :options="swiperOption3">
-              <!-- slides -->
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
-                    <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
-                    </div> 
-                  </p>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="menu-img">
-                    <img src="/static/img/index (1).png" />
-                </div>
-                <div class="menu-txt">
-                  <h4>宫保鸡丁</h4>
-                  <p class="list2">
-                    <b>￥25<em>(6折)</em></b>
+                    <b>￥{{item.price}}</b>
                     <div class="btn">  
                       <button class="minus">-</button>  
                       <i>0</i>  
@@ -741,7 +104,7 @@
 //轮播图
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-
+import proxy from '../proxy/index'
 
 export default {
   components:{
@@ -749,12 +112,31 @@ export default {
     swiperSlide
   },
   name: 'HelloWorld',
+  created(){
+    proxy.homeBanner().then((response) => {
+      this.bannerFood = response.data;
+    });
+
+    proxy.hotFood().then((response) => {
+      this.hotFood = response.data;
+    });
+
+    proxy.foodCate().then((response) => {
+      this.foodCate = response.data.foodcate;
+      this.foodList = response.data.foodlist;
+      this.activeName = this.foodCate[0].name;
+    });
+    
+  },
   data () {
     return {
       activeName:"first",
       tabPosition: 'left',
-      swiperOption:{},
+      swiperOption:{
+        autoplay : 1000,
+      },
       swiperOption2:{
+        autoplay : 5000,
         slidesPerView: 2,
         spaceBetween: 30,
         pagination: {
@@ -772,13 +154,21 @@ export default {
           el: '.swiper-pagination',
           clickable: true
         }
-      }
+      },
+      bannerFood:[],
+      hotFood:[],
+      foodCate:[],
+      foodList:[],
     }
   },
   methods: {
     handleClick(tab, event) {
-      // console.log(tab, event);
-    }
+      var index = tab.index ? tab.index : 0;
+      var cateid = this.foodCate[index] ? this.foodCate[index].id : 0;
+      proxy.foodList({cateid:cateid}).then(response => {
+        this.foodList = response.data;
+      });
+    },
   }
 }
 </script>
