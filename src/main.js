@@ -43,6 +43,24 @@ Vue.use(Loading)
 //设置cookie
 Vue.use(VueCookies)
 
+
+//增加一个路由方法用来判断是否登录
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth)
+  {
+    //如果requireAuth属性返回true说明要登录
+    var user = VueCookies.get("user");
+    if(user)
+    {
+      next();  //继续往下走
+    }else{
+      next('/login'); //如果没有cookie就返回登录
+    }
+  }else{
+    next(); //继续往下走
+  }
+});
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
