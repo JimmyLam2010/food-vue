@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <router-view/>
-    <footer-component></footer-component>
+    <router-view v-on:isActive="isActive"/>
+    <footer-component :active="active"></footer-component>
   </div>
 </template>
 
@@ -9,6 +9,17 @@
 import footerComponent from './components/footer.vue'
 export default {
   name: 'App',
+  data(){
+    return {
+      active:false
+    }
+  },
+  methods:{
+    isActive(active)
+    {
+      this.active = active;
+    }
+  },
   components:{footerComponent}
 }
 </script>

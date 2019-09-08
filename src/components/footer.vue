@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav :class="{'active':active}">
     <router-link to="/">
       <img src="/static/img/index1-1.png">点餐
     </router-link>
@@ -17,6 +17,15 @@
 
 <script>
   export default {
-    name:"footerComponent"
+    name:"footerComponent",
+    props:[
+      "active"
+    ],
   }
 </script>
+
+<style>
+.active{
+  display: none;
+}
+</style>
