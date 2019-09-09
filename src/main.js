@@ -23,6 +23,10 @@ import 'wc-messagebox/style.css'
 import VueCookies from 'vue-cookies'
 
 
+//百度地图
+import BaiduMap from 'vue-baidu-map'
+
+
 //设置全局
 Vue.use(Tabs);
 Vue.use(TabPane);
@@ -42,6 +46,12 @@ Vue.use(Loading)
 
 //设置cookie
 Vue.use(VueCookies)
+
+
+//设置挂载
+Vue.use(BaiduMap,{
+  ak:"ubnAS9NZvICXBhNbwMF9S5P6eM8hCcIe"
+});
 
 
 //增加一个路由方法用来判断是否登录

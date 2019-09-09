@@ -13,20 +13,20 @@
           </a>
         </li>
         <li>
-          <a href="edit-address.html" class="isNext">
+          <router-link to="/orderlist" class="isNext">
             <span><em><img src="/static/img/about3.png"></em>我的订单</span>
             <span></span>
-          </a>
+          </router-link>
         </li>
         <li>
           <a href="about-integral.html" class="isNext">
-            <span><em><img src="/static/img/about1.png"></em>余额充值</span>
+            <span><em><img src="/static/img/about1.png"></em>余额充值(输入金额提交，后台审核通过增加金额)</span>
             <span></span>
           </a>
         </li>
         <li>
           <a href="about-coupon.html" class="isNext">
-            <span><em><img style="height: 0.43rem;"  src="/static/img/about2.png"></em>我的优惠券</span>
+            <span><em><img style="height: 0.43rem;"  src="/static/img/about2.png"></em>我的优惠券(后台统一发放|输入口令得到优惠券)</span>
             <span></span>
           </a>
         </li>

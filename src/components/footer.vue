@@ -3,12 +3,15 @@
     <router-link to="/">
       <img src="/static/img/index1-1.png">点餐
     </router-link>
-    <a href="my-order.html" class="categoryIcon">
+    <router-link to="/orderAdd" class="userIcon">
+        <img src="/static/img/index4.png">购物车
+    </router-link>
+    <router-link to="/orderlist" class="categoryIcon">
       <img src="/static/img/index2.png">订单
-    </a>
-    <a href="service.html" class="cartIcon numberCount">
+    </router-link>
+    <router-link to="/services" class="cartIcon numberCount">
       <img src="/static/img/index3.png">服务
-    </a>
+    </router-link>
     <router-link to="/user" class="userIcon">
         <img src="/static/img/index4.png">我的
     </router-link>

@@ -2,59 +2,20 @@
   <div>
     <!--header-->
 		<header >
-			<a href="scanCode.html" class="location" id="location" data-title-type="native">
-				<img src="/static/img/sys.png" />
-			</a>
+			<router-link to="/" class="location" id="location" data-title-type="native">
+				<img src="/static/img/back.png" />
+			</router-link >
 
 			<div class="top-sch-box flex-col logoIcon">
 				<a>
 					<aside class="index-searchArea">
 						<input class="input-text-searchArea" type="text" placeholder="请输入餐品" />
-						<input @click="search" type="button" value="搜索" class="input-searchBtn" />
+						<input type="button" value="搜索" class="input-searchBtn" />
 					</aside>
 				</a>
 			</div>
-      <router-link class="rt_searchIcon" to="/map">
-        <img style="width:70%;" src="/static/img/mapIcon.png">
-      </router-link>
 		</header>
 
-		<!--banner-->
-		<div id="slide" class="public-banner">
-			<swiper :options="swiperOption">
-        <!-- slides -->
-        <swiper-slide v-for="item in bannerFood" v-bind:key="item.id">
-          <img :src="item.thumb" />
-        </swiper-slide>
-
-      </swiper>
-		</div>
-		
-    <!--今日促销-->	
-    <div class="swiper-container foodhot">
-      <swiper :options="swiperOption2">
-        <!-- slides -->
-        <swiper-slide v-for="(item) in hotFood" v-bind:key="item.id">
-          <div class="menu-img">
-              <img :src="item.thumb" />
-          </div>
-          <div class="menu-txt">
-            <h4>{{item.name}}</h4>
-            <p class="list2">
-              <b>￥{{item.price}}</b>
-              <div class="btn">  
-                <button class="minus" @click="minus(item.id)">-</button>  
-                <i>{{item.num}}</i>  
-                <button class="add" @click="add(item.id)">+</button>  
-              </div> 
-            </p>
-          </div>
-        </swiper-slide>
-        <!-- Optional controls -->
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
-    </div>
-      
     <!--分类商品-->
     <div class="main">
       <el-tabs v-model="activeName" :tab-position="tabPosition" @tab-click="handleClick">
@@ -98,7 +59,6 @@
         <router-link to="/orderAdd" id="btnselect" class="xhlbtn">去结算</router-link>
       </div>   
     </div>
-    <div style="height:1.2rem;"></div>
   </div>
 </template>
 
@@ -113,7 +73,7 @@ export default {
     swiper,
     swiperSlide
   },
-  name: 'home',
+  name: 'HelloWorld',
   created(){
     this.$emit("isActive",false);
 
@@ -294,13 +254,21 @@ export default {
     },
     search()
     { 
-      this.$router.push('/search');
+      this.$router.push('/user');
     }
   }
 }
 </script>
 
 <style scoped>
+.main{
+  height:600px;
+  margin-top:50px;
+}
+
+.main div{
+  height:100%;
+}
 .menu-img{
   width:100%;
 }

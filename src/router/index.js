@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import HomeRouter from './home'
 import UserRouter from './user'
 import OrderRouter from './order'
+import ServicesRouter from "./services"
 
 Vue.use(Router)
 
@@ -12,6 +13,7 @@ export default new Router({
   routes: [
     ...HomeRouter,
     ...UserRouter,
-    ...OrderRouter
+    ...OrderRouter,
+    ...ServicesRouter
   ]
 })
