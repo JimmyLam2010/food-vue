@@ -234,7 +234,7 @@ export default {
           let data = {
             userid:this.$cookies.get("user").userid,
             foodid:foodid,
-            foodnum:this.hotFood[key].num
+            foodnum:this.foodList[key].num
           }
           this.addCart(data);
         }
@@ -280,7 +280,7 @@ export default {
           let data = {
             userid:this.$cookies.get("user").userid,
             foodid:foodid,
-            foodnum:this.hotFood[key].num
+            foodnum:this.foodList[key].num
           }
 
           if(data.foodnum > 0)

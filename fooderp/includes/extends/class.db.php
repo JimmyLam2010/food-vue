@@ -201,25 +201,8 @@ class DB
   //插入方法
   public function add($table,$data)
   {
-    //获取表字段
-    $sql = "desc {$this->pre}$table";
-    $res = mysqli_query($this->link,$sql);
-    $tableFields = [];
-    while($row = mysqli_fetch_assoc($res))
-    {
-      if($row['Key'] == "PRI")
-      {
-          continue;
-      }else{
-        $tableFields[] = $row['Field'];
-      }
-    }
-
-    //组装好的字段部分
-    sort($tableFields);
-    $fields = "`".implode("`,`",$tableFields)."`";
-
-    ksort($data);
+    $dataKey = array_keys($data);
+    $fields = "`".implode("`,`",$dataKey)."`";
     $value = "'".implode("','",$data)."'";
 
     $this->sql = "INSERT INTO {$this->pre}$table($fields)VALUES($value)";
@@ -261,7 +244,13 @@ class DB
   public function getSQL()
   {
     return $this->sql;
+  }
 
+  //执行源生sql语句方法
+  public function query($sql)
+  {
+    $this->sql = $sql;
+    return mysqli_query($this->link,$this->sql);
   }
 }
 

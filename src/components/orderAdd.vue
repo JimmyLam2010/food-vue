@@ -36,6 +36,12 @@
           <td align="right" class="padr3">￥<em>{{order.price}}</em></td>
         </tr>		
         <tr style="border-top: solid 8px #f1f1f1;">
+          <td align="left" colspan="1" class="padl3">订单备注:</td>
+          <td align="right" class="padr3">
+           <textarea v-model="order.content" placeholder="请输入订单备注"></textarea>
+          </td>
+        </tr>		
+        <tr style="border-top: solid 8px #f1f1f1;">
           <td align="left" colspan="1" class="padl3">实付金额:</td>
           <td align="right" class="padr3">
             <a class="padding-right23 colorf00">￥{{order.price}}</a>
@@ -55,7 +61,7 @@
 <script>
   import proxy from '../proxy/index'
   export default {
-    name:"orderAddd",
+    name:"orderAdd",
     created()
     {
       this.$emit("isActive",true);
@@ -74,6 +80,7 @@
           ordertype:0,
           ordertime:null,
           price:0,
+          content:"",
         }
       }
     },
@@ -86,8 +93,14 @@
           userid:this.$cookies.get('user').userid
         };
         proxy.orderAdd(data).then(response => {
-          console.log(response);
-          return false;
+          if(!response.result)
+          {
+            this.$alert(response.msg);
+          }else{
+            this.$alert(response.msg).then((res)=>{
+              this.$router.push('/user');
+            });
+          }
         });
       }
     }
