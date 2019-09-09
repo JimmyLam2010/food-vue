@@ -36,4 +36,20 @@ export default {
       params: params
     })
   },
+  //更新购物车
+  addCart(params = {}) {
+    return request({
+      method: "post",
+      url: "/api/home.php?action=addcart",
+      params: params
+    })
+  },
+  //获取最新的购物车数据
+  countCart(params = {}) {
+    return request({
+      method: "post",
+      url: "/api/home.php?action=countcart",
+      params: params
+    })
+  },
 }

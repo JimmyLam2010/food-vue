@@ -46,6 +46,9 @@
 <script>
   export default {
     name:'user',
+    created(){
+      this.$emit("isActive",false);
+    },
     data(){
       return {
         user:this.$cookies.get("user")

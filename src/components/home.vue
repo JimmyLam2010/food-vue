@@ -41,9 +41,9 @@
             <p class="list2">
               <b>￥{{item.price}}</b>
               <div class="btn">  
-                <button class="minus">-</button>  
-                <i>0</i>  
-                <button class="add">+</button>  
+                <button class="minus" @click="minus(item.id)">-</button>  
+                <i>{{item.num}}</i>  
+                <button class="add" @click="add(item.id)">+</button>  
               </div> 
             </p>
           </div>
@@ -69,9 +69,9 @@
                   <p class="list2">
                     <b>￥{{item.price}}</b>
                     <div class="btn">  
-                      <button class="minus">-</button>  
-                      <i>0</i>  
-                      <button class="add">+</button>  
+                      <button class="minus" @click="minus(item.id)">-</button>  
+                      <i>{{item.num ? item.num : 0}}</i>  
+                      <button class="add" @click="add(item.id)">+</button>  
                     </div> 
                   </p>
                 </div>
@@ -88,12 +88,12 @@
       <div class="left">
         <span id="cartN">
           <img src="/static/img/shop_03.png"/>
-          <span id="totalcountshow">0</span>
-          <span class="totalpriceshow">￥<em id="totalpriceshow">0</em></span>
+          <span id="totalcountshow">{{cart.count ? cart.count : 0}}</span>
+          <span class="totalpriceshow">￥<em id="totalpriceshow">{{cart.price ? cart.price : 0}}</em></span>
         </span>				
         </div>  
       <div class="right">  
-        <a id="btnselect" class="xhlbtn  disable" href="order-settlement.html">去结算</a>  
+        <router-link to="/orderAdd" id="btnselect" class="xhlbtn">去结算</router-link>
       </div>   
     </div>
     <div style="height:1.2rem;"></div>
@@ -113,19 +113,30 @@ export default {
   },
   name: 'HelloWorld',
   created(){
+    this.$emit("isActive",false);
+
+    let userid = this.$cookies.get('user').userid ? this.$cookies.get('user').userid : 0;
+
+    let data = {
+      userid:userid
+    }
+
     proxy.homeBanner().then((response) => {
       this.bannerFood = response.data;
     });
 
-    proxy.hotFood().then((response) => {
+    proxy.hotFood(data).then((response) => {
       this.hotFood = response.data;
     });
 
-    proxy.foodCate().then((response) => {
+    proxy.foodCate(data).then((response) => {
       this.foodCate = response.data.foodcate;
       this.foodList = response.data.foodlist;
       this.activeName = this.foodCate[0].name;
     });
+
+    //更新购物车方法
+    this.updateCart();
     
   },
   data () {
@@ -159,16 +170,126 @@ export default {
       hotFood:[],
       foodCate:[],
       foodList:[],
+      cart:{}
     }
   },
   methods: {
     handleClick(tab, event) {
       var index = tab.index ? tab.index : 0;
       var cateid = this.foodCate[index] ? this.foodCate[index].id : 0;
-      proxy.foodList({cateid:cateid}).then(response => {
+      let userid = this.$cookies.get('user').userid ? this.$cookies.get('user').userid : 0;
+      proxy.foodList({cateid:cateid,userid:userid}).then(response => {
         this.foodList = response.data;
       });
     },
+    addCart(data)
+    {
+      //添加购物车
+      proxy.addCart(data).then((response)=>{
+        if(response.result)
+        {
+            this.updateCart();
+        }
+      });
+    },
+    updateCart()
+    {
+      let data = {userid:this.$cookies.get('user').userid};
+      //更新购物车
+      proxy.countCart(data).then(cart => {
+        this.cart = cart.data;
+      });
+    },
+    minus(foodid)
+    {
+      //数量减少
+      this.hotFood.forEach((item,key)=>{
+        if(item.id == foodid)
+        {
+          if(this.hotFood[key].num > 0)
+          {
+            this.hotFood[key].num--;
+          }else{
+            this.hotFood[key].num = 0;
+          }
+          let data = {
+            userid:this.$cookies.get("user").userid,
+            foodid:foodid,
+            foodnum:this.hotFood[key].num
+          }
+          this.addCart(data);
+        }
+      });
+
+      this.foodList.forEach((item,key)=>{
+        if(item.id == foodid)
+        {
+          if(this.foodList[key].num > 0)
+          {
+            this.foodList[key].num--;
+          }else{
+            this.foodList[key].num = 0;
+          }
+
+          let data = {
+            userid:this.$cookies.get("user").userid,
+            foodid:foodid,
+            foodnum:this.foodList[key].num
+          }
+          this.addCart(data);
+        }
+      });
+      
+
+    },
+    add(foodid)
+    {
+      //数量的增加
+      this.hotFood.forEach((item,key)=>{
+        if(item.id == foodid)
+        {
+          if(this.hotFood[key].num)
+          {
+            this.hotFood[key].num++;
+          }else{
+            this.hotFood[key].num = 1;
+          }
+
+          let data = {
+            userid:this.$cookies.get("user").userid,
+            foodid:foodid,
+            foodnum:this.hotFood[key].num
+          }
+          if(data.foodnum > 0)
+          {
+            this.addCart(data);
+          }
+        }
+      });
+
+      this.foodList.forEach((item,key)=>{
+        if(item.id == foodid)
+        {
+          if(this.foodList[key].num)
+          {
+            this.foodList[key].num++;
+          }else{
+            this.foodList[key].num = 1;
+          }
+
+          let data = {
+            userid:this.$cookies.get("user").userid,
+            foodid:foodid,
+            foodnum:this.foodList[key].num
+          }
+
+          if(data.foodnum > 0)
+          {
+            this.addCart(data);
+          }
+        }
+      });
+    }
   }
 }
 </script>
